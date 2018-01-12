@@ -160,7 +160,15 @@ TRAINmergedData = merge(merge_temp, trainx, by.x = "row", by.y="row")
 
 alldata <- subset(rbind(TESTmergedData, TRAINmergedData), select = -row)
 
+#export data
+write.table(alldata, file = "N:\\training\\Data Cleaning\\centraltendancyanddispersiondetailed.csv")
+
 alldata2 <- aggregate(alldata[,3:88], list(alldata$subjectid, alldata$activity), mean)
+
+#subjectid and activity were renamed to Group.1 and Group.2, fix this below
+setnames(alldata2, c("Group.1", "Group.2"), c("subjectid", "activity"))
+
+write.table(alldata2, file = "N:\\training\\Data Cleaning\\centraltendancyanddispersionsummary.csv")
 
 
 
